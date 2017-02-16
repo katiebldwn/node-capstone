@@ -1,0 +1,13 @@
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<div class="results"></div>
+
+<script>
+$.getJSON("/getusers", function(data){
+	console.log(data);
+	$.each(data, function(index, value){
+		$(".results").append("name: " + value.firstName);
+	})
+})
+</script>
+
+<h1>User List</h1>

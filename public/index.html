@@ -1,0 +1,33 @@
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<div class="results"></div>
+
+<h1>Add a User</h1>
+<label for="firstName">First Name: </label>
+<input id="firstName" name="firstName" type="text">
+<label for="lastName">Last Name: </label>
+<input id="lastName" name="lastName" type="text">
+<button id="submit">Submit</button>
+
+
+<script>
+$.getJSON("/getusers", function(data){
+	console.log(data);
+	$.each(data, function(index, value){
+		$(".results").append("name: " + value.firstName + " " + value.lastName);
+	})
+})
+$('button#submit').click(function() {
+	var user = new Object();
+	user.firstName = $('input#firstName').val();
+	user.lastName = $('input#lastName').val();
+	console.log(user);
+	$.ajax({
+		url: 'http://localhost:8080/addUser',
+		type: 'post',
+		data: user,
+		success: function() {
+			console.log(user);
+		}
+	})
+});
+</script>

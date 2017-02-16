@@ -1,0 +1,24 @@
+{
+  "name": "node-capstone",
+  "version": "1.0.0",
+  "description": "\"Node capstone\"",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha ./test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.8.1",
+    "morgan": "^1.7.0",
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.1.2"
+  }
+}

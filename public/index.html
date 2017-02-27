@@ -1,33 +1,173 @@
 <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="jquery.easyModal.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="main.css">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+
+
+<h1>Tenant Tracker</h1>
+
+<h2>Add a User</h2>
+	<label class ="addUserLabel" for="firstName">First Name: </label>
+	<input id="firstName" name="firstName" type="text">
+	<label class="addUserLastName" for="lastName">Last Name: </label>
+	<input id="lastName" name="lastName" type="text">
+<button class="submit">Submit</button>
+
 <div class="results"></div>
 
-<h1>Add a User</h1>
-<label for="firstName">First Name: </label>
-<input id="firstName" name="firstName" type="text">
-<label for="lastName">Last Name: </label>
-<input id="lastName" name="lastName" type="text">
-<button id="submit">Submit</button>
+
+
+
+<nav class="accordion arrows">
+	<header class="box">
+		<label for="acc-close" class="box-title">Tenant List</label>
+	</header>
+	<div class="tenantList"></div>
+	<input type="radio" name="accordion" id="acc-close" />
+</nav>
+
+
 
 
 <script>
-$.getJSON("/getusers", function(data){
-	console.log(data);
-	$.each(data, function(index, value){
-		$(".results").append("name: " + value.firstName + " " + value.lastName);
-	})
-})
-$('button#submit').click(function() {
-	var user = new Object();
-	user.firstName = $('input#firstName').val();
-	user.lastName = $('input#lastName').val();
-	console.log(user);
-	$.ajax({
-		url: 'http://localhost:8080/addUser',
-		type: 'post',
-		data: user,
-		success: function() {
-			console.log(user);
-		}
-	})
-});
+//document ready
+ $(function() {
+ 	//GET users from DB
+     $.getJSON("/getusers", function(data) {
+     	//For each user in the database, append it to the results div
+         var count = 1;
+         $.each(data, function(index, value) {
+             // $(".results").append("<div class='tenant' id='"+value._id+"'> name: " + value.firstName + " " + value.lastName + "<i class='fa fa-trash' aria-hidden='true'></i></div>");
+             $('.tenantList').append('<input type="radio" name="accordion" id="cb'+count+'" /><section class="box"><label class="box-title" for="cb'+count+'">'+value.firstName+' '+value.lastName+'</label><label class="box-close" for="acc-close"></label><div class="box-content"><button class="easy-modal-open" href="#modal'+count+'">View/Edit Profile</button><br>Building-Apt #:<br>Lease Expiration Date:<br>Total Late Fee Count: <span class="lateFeeTotal">'+value.lateFees+'</span><br>Phone #:<br>Email Address:<br><i class="fa fa-trash" aria-hidden="true" id="'+value._id+'"></i></div></section>');
+             $('body').append('<div class="easy-modal-animated" id="modal'+count+'"><h3>'+value.firstName+' '+value.lastName+'</h3><hr><div id='+value._id+' class="leftModal"><br>Building-Apt #: <span class="aptNumber" placeholder="BigSky-#203">'+value.aptNumber+' </span><i class="fa fa-pencil-square-o editApt" aria-hidden="true"></i><br>Lease Start Date:<br>Lease Expiration Date:<br>Phone #:<br>Email Address:</div><div class="rightModal"><br>Total Late Fee Count: <span class="lateFeeTotal">'+value.lateFees+'</span> <i class="fa fa-angle-up" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i><br>Late Fee Date: <i class="fa fa-plus" id='+value._id+' aria-hidden="true"></i><div class="newLateDate"></div><br>5 Day Notice<br>Date Posted:<br>Expiration Date:<br>Satisfied?</div>');
+             count++;
+         })
+
+        $('.fa-plus').click(function() {
+        	$('.newLateDate').append('<input type="date"><button class="lateDate">Enter</button>');
+        	console.log('made it');
+        })
+
+        $('.editApt').click(function() {
+        	$('.aptNumber').html('<input type="text" class="newAptNumber" placeholder="BigSky-#203"><button class="aptSubmit">Submit</button>');
+        	$(this).hide();
+        	$('.aptSubmit').click(function() {
+        		var aptNumber = $('.newAptNumber').val();
+        		console.log(aptNumber);
+        		var data = new Object();
+        		data.aptNumber = aptNumber;
+        		console.log(data);
+        		// var idToUpdate = $(this).closest('h3').attr('id');
+        		var idToUpdate = $(this).parent('span').parent('div.leftModal').attr('id');
+        		data._id = idToUpdate;
+        		data.firstName = "Bill";
+        		data.lastName = "Martin";
+        		data.lateFees = 3;
+        		console.log(idToUpdate);
+        	$.ajax({
+             type: 'PUT',
+             //convert the object to a string for the POST
+             data: data,
+             url: 'http://localhost:8080/updateTenant/' + idToUpdate,
+             success: function() {
+             	console.log(data);
+             }
+         });
+        	})
+        })
+
+        $('.lateDate').click(function() {
+        	$.ajax({
+             type: 'PUT',
+             //convert the object to a string for the POST
+             data: JSON.stringify(data),
+             contentType: 'application/json',
+             url: 'http://localhost:8080/getUsers/' + idToUpdate,
+             success: function(data) {
+                 console.log('info added successfully');
+             }
+         });
+        })
+
+         $('.easy-modal').easyModal({
+			top: 0,
+			overlay: 0.2
+		});
+
+		$('.easy-modal-open').click(function(e) {
+			var target = $(this).attr('href');
+			$(target).trigger('openModal');
+			e.preventDefault();
+		});
+
+		$('.easy-modal-close').click(function(e) {
+			$('.easy-modal').trigger('closeModal');
+		});
+
+		$('.easy-modal-animated').easyModal({
+			top: 0,
+			overlay: 0.2,
+			transitionIn: 'animated bounceInLeft',
+			transitionOut: 'animated bounceOutRight',
+			closeButtonClass: '.animated-close'
+		});
+
+
+         $('.fa-trash').click(function() {
+     	var deleteItem = $(this).attr('id');
+     	console.log(deleteItem);
+     	$.ajax({
+             type: 'DELETE',
+             //convert the object to a string for the DELETE
+             // data: JSON.stringify(data),
+             // contentType: 'application/json',
+             url: 'http://localhost:8080/deleteUser/' + deleteItem,
+             success: function(data) {
+                 console.log('user deleted successfully');
+             }
+         });
+     	$(this).parent('.box-content').parent('section').remove();
+     })
+         $('.fa-angle-up').click(function() {
+         	var totalLate = Number($(this).siblings('.lateFeeTotal').text());
+         	console.log(totalLate);
+         	var newTotalLate = totalLate + 1;
+         	var idToUpdate = $(this).siblings('.fa-trash').attr('id');
+         	var data = {};
+         	data._id = idToUpdate;
+         	data.lateFees = newTotalLate;
+         	console.log(data);
+         	$.ajax({
+             type: 'PUT',
+             //convert the object to a string for the PUT
+             data: JSON.stringify(data),
+             contentType: 'application/json',
+             url: 'http://localhost:8080/getUsers/' + idToUpdate,
+             success: function(data) {
+                 console.log('user updated successfully');
+             }
+         });
+         })
+     })
+     //Add a new user
+     $('#submit').click(function(e) {
+     	//create the new user object
+         var data = {};
+         data.firstName = $('input#firstName').val();
+         data.lastName = $('input#lastName').val();
+
+         $.ajax({
+             type: 'POST',
+             //convert the object to a string for the POST
+             data: JSON.stringify(data),
+             contentType: 'application/json',
+             url: 'http://localhost:8080/newUser',
+             success: function(data) {
+                 console.log('user added successfully');
+             }
+         });
+     });
+ });
 </script>

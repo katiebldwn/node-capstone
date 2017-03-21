@@ -17,6 +17,7 @@ Once the tenant's information has been entered, the Submit button is clicked whi
 <img src="/readme-screenshots/submitted-info.jpg">
 
 Upon completion of the tenant's profile, the user can click off of the modal pop-up and refresh the page. The drop-down menu for the tenant will reflect the updated information. Should the user wish to delete the tenant, the garbage can on the bottom right of the tenant profile will, when clicked, operate the Delete function and remove the tenant from the page and the database.
+
 <img src="/readme-screenshots/final-info.jpg">
 
 

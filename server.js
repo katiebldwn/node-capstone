@@ -14,7 +14,6 @@ var NewUser = new Schema({
 	lastName: String
 })
 
-// var schema = new mongoose.Schema({name: 'string'})
 
 var User = mongoose.model('User', NewUser);
 
@@ -58,27 +57,6 @@ app.post('/newUser', function(req, res){
 });
 
 app.put('/updateTenant/:id', function(req, res) {
-	// const requiredFields = ['firstName', 'lastName'];
-	// for (var i=0; i<requiredFields.length; i++) {
-	// 	const field = requireFields[i];
-	// 	if (!(field in req.body)) {
-	// 		const message = `Missing \`${field}\` in request body`
-	// 		console.error(message);
-	// 		return res.status(400).send(message);
-	// 	}
-	// }
-	// if (req.params.id !== req.body.id) {
-	// 	const message = (
-	// 		`Request path id (${req.params.id}) and request body id `
-	// 		`(${req.body.id}) must match`);
-	// 	console.error(message);
-	// 	return res.status(400).send(message);
-	// }
-	// var updatedUser = User.update({
-	// 	id: req.body.id,
-	// 	lateFees: req.body.lateFees
-	// });
-	// res.status(204).json(updatedUser);
 	var queryId = {
 		_id: req.params.id
 	};
@@ -102,9 +80,6 @@ app.delete('/deleteUser/:id', function(req, res) {
 	return res.status(500).json({message: 'Internal Server Error'}); }
 	res.status(201).json({ message: 'Item was deleted' })
 	})
-	// newUser.delete(req.params.id);
-	// console.log('Deleting user \`${req.params.id}\`');
-	// res.status(204).end();
 });
 
 

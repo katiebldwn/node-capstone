@@ -1,8 +1,6 @@
-//document ready
+
  $(function() {
- 	//GET users from DB
      $.getJSON("/getusers", function(data) {
-     	//For each user in the database, append it to the results div
          var count = 1;
          $.each(data, function(index, value) {
             if (value.satisfied === true) {
@@ -11,7 +9,6 @@
             else {
                 var tenantSatisfied = '';
             }
-             // $(".results").append("<div class='tenant' id='"+value._id+"'> name: " + value.firstName + " " + value.lastName + "<i class='fa fa-trash' aria-hidden='true'></i></div>");
              $('.tenantList').append('<input type="radio" name="accordion" id="cb'+count+'" /><section class="box"><label class="box-title" for="cb'+count+'">'+value.firstName+' '+value.lastName+'</label><label class="box-close" for="acc-close"></label><div class="box-content"><button class="easy-modal-open" href="#modal'+count+'">View/Edit Profile</button><br><table><tr><td>Building-Apt #: </td><td>'+value.aptNumber+'</td></tr><tr><td>Lease Expiration Date: </td><td><span class="expirationDate">'+value.leaseDateEnd+'</span></td></tr><tr><td>Total Late Fee Count: </td><td><span class="lateFeeTotal">'+value.lateFeeTotal+'</span></td></tr><tr><td>Phone #: </td><td>'+value.phoneNumber+'</td></tr><tr><td>Email Address: </td><td>'+value.emailAddress+'</td></tr></table><i class="fa fa-trash" aria-hidden="true" id="'+value._id+'"></i></div></section>');
              $('body').append('<div class="easy-modal-animated" id="modal'+count+'"><h3><span class="fn">'+value.firstName+'</span> <span class="ln">'+value.lastName+'</span></h3> <i class="fa fa-pencil-square-o editApt" aria-hidden="true"></i><hr><div id='+value._id+' class="leftModal"><br>Building-Apt #: <span class="aptNumber" placeholder="BigSky-#203">'+value.aptNumber+' </span><br><br>Lease Start Date: <span class="leaseDateStart" placeholder="01/01/2017">'+value.leaseDateStart+' </span><br><br>Lease Expiration Date: <span class="leaseDateEnd" placeholder="01/01/2017">'+value.leaseDateEnd+' </span><br><br>Phone #: <span class="phoneNumber" placeholder="111-111-1111">'+value.phoneNumber+' </span><br><br>Email Address: <span class="emailAddress" placeholder="bob@gmail.com">'+value.emailAddress+' </span></div><div class="rightModal"><br>Total Late Fee Count: <span class="lateFeeTotal" placeholder ="3">'+value.lateFeeTotal+'</span> <i class="fa fa-angle-up" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i><br>Late Fee Date: <i class="fa fa-plus" id='+value._id+' aria-hidden="true"></i><div class="newLateDate"></div><ul class="allLateDates"></ul><br>5 Day Notice<br>Date Posted: <span class="noticeDate" placeholder ="01/01/2017">'+value.noticeDate+'</span><br>Expiration Date: <span class="expirationDate" placeholder="01/01/2017">'+value.expirationDate+'</span><br>Satisfied? <div class="satisfied"><input type="checkbox" id="click'+count+'" name="click'+count+'" class="click" '+tenantSatisfied+'/><label for="click'+count+'"> &nbsp; </label></div></div>');
              count++;
@@ -94,7 +91,6 @@
                 data.noticeDate = noticeDate;
                 data.expirationDate = expirationDate;
                 data.satisfied = satisfied;
-        		// var idToUpdate = $(this).closest('h3').attr('id');
         		var idToUpdate = $(this).parent('div').children('div.leftModal').attr('id');
 
         		data.firstName = $(this).parent('div.easy-modal-animated').children('h3').children('span.fn').text();
@@ -131,7 +127,6 @@
         $('.lateDate').click(function() {
         	$.ajax({
              type: 'PUT',
-             //convert the object to a string for the POST
              data: JSON.stringify(data),
              contentType: 'application/json',
              url: 'http://localhost:8080/getUsers/' + idToUpdate,
@@ -170,9 +165,6 @@
      	console.log(deleteItem);
      	$.ajax({
              type: 'DELETE',
-             //convert the object to a string for the DELETE
-             // data: JSON.stringify(data),
-             // contentType: 'application/json',
              url: 'http://localhost:8080/deleteUser/' + deleteItem,
              success: function(data) {
                  console.log('user deleted successfully');
@@ -191,7 +183,6 @@
          	console.log(data);
          	$.ajax({
              type: 'PUT',
-             //convert the object to a string for the PUT
              data: JSON.stringify(data),
              contentType: 'application/json',
              url: 'http://localhost:8080/getUsers/' + idToUpdate,
@@ -201,16 +192,13 @@
          });
          })
      })
-     //Add a new user
      $('.submit').click(function(e) {
-     	//create the new user object
          var data = {};
          data.firstName = $('input#firstName').val();
          data.lastName = $('input#lastName').val();
 
          $.ajax({
              type: 'POST',
-             //convert the object to a string for the POST
              data: JSON.stringify(data),
              contentType: 'application/json',
              url: 'http://localhost:8080/newUser',

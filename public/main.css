@@ -1,5 +1,16 @@
 * {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Overlock', cursive;
+}
+
+body {
+	background-image: url("skyscraper-450793_960_720.jpg");
+}
+
+.topTitle {
+	background: rgba(255, 255, 255, 0.7);
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
 .tenant {
@@ -8,35 +19,35 @@
 	padding: 10px;
 }
 
+
 .fa-trash {
 	margin-left: 10px;
 }
 
 h1 {
-	margin-left: 500px;
+	/*margin-left: 500px;*/
+	text-align: center;
 	font-weight: 900;
 }
 
 h2 {
-	margin-left: 550px;
+	text-align: center;
+	/*margin-left: 550px;*/
 }
 
 input {
 	margin-bottom: 15px;
 }
 
-.addUserLabel {
-	margin-left: 350px;
-}
-
-.addUserLastName {
-
+.addUser {
+	text-align: center;
 }
 
 
 .accordion {
-	margin: auto;
-	width: 400px;
+	width: 40%;
+	margin-left: 30%;
+	margin-right: 30%;
 }
 .accordion input {
 	display: none;
@@ -66,10 +77,11 @@ header.box {
 }
 header .box-title {
 	margin: 0;
-	font-weight: normal;
+	font-weight: bold;
 	font-size: 16pt;
-	color: white;
+	color: black;
 	cursor: initial;
+	background: #647979;
 }
 .box-title {
 	width: calc(100% - 40px);
@@ -136,7 +148,12 @@ input:checked + section.box .box-title:before {
 		background-color: white;
 	}
 
-.leftModal, .rightModal {
+.leftModal {
+	float: left;
+	width: 48%;
+}
+
+.rightModal {
 	float: left;
 	width: 48%;
 }
@@ -146,4 +163,63 @@ input:checked + section.box .box-title:before {
     color: black;
     visibility: visible;
     cursor: pointer;
+}
+
+
+
+input.click:empty
+{
+    margin-left: -999px;
+}
+
+input.click:empty ~ label
+{
+    position: relative;
+    float: left;
+    line-height: 1.6em;
+    text-indent: 4em;
+    margin: 0.2em 0;
+    cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input.click:empty ~ label:before, 
+input.click:empty ~ label:after
+{
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: ' ';
+    width: 3.6em;
+    background-color: #c33;
+    border-radius: 0.3em;
+    box-shadow: inset 0 0.2em 0 rgba(0,0,0,0.3);
+    -webkit-transition: all 500ms ease-in;
+  transition: all 500ms ease-in;
+}
+
+input.click:empty ~ label:after
+{
+    width: 1.4em;
+    top: 0.1em;
+    bottom: 0.1em;
+    margin-left: 0.1em;
+    background-color: #fff;
+    border-radius: 0.15em;
+    box-shadow: inset 0 -0.2em 0 rgba(0,0,0,0.2);
+}
+
+input.click:checked ~ label:before
+{
+    background-color: #393;
+}
+
+input.click:checked ~ label:after
+{
+    margin-left: 2.1em;
 }

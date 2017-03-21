@@ -8,10 +8,9 @@ var storage = server.storage;
 
 chai.use(chaiHttp);
 
-
-describe('index page', function() {
-  it('exists', function(done) {
-    chai.request(app)
+describe('serve the index page', function() {
+  it('loads the homepage', function(done) {
+    chai.request(server)
       .get('/')
       .end(function(err, res) {
         res.should.have.status(200);
@@ -19,4 +18,4 @@ describe('index page', function() {
         done();
     });
   });
-});
+}); 

@@ -1,21 +1,7 @@
-/**
-* easyModal.js v1.3.2
-* A minimal jQuery modal that works with your CSS.
-* Author: Flavius Matis - http://flaviusmatis.github.com/
-* URL: https://github.com/flaviusmatis/easyModal.js
-*
-* Copyright 2012, Flavius Matis
-* Released under the MIT license.
-* http://flaviusmatis.github.com/license.html
-*/
 
-/*jslint browser: true*/
-/*global jQuery*/
 
 (function($,sr){
 
-  // debouncing function from John Hann
-  // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
   var debounce = function (func, threshold, execAsap) {
       var timeout;
 
@@ -188,7 +174,6 @@
 
     $.fn.easyModal = function (method) {
 
-        // Method calling logic
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }

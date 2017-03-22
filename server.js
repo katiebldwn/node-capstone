@@ -83,14 +83,14 @@ app.delete('/deleteUser/:id', function(req, res) {
 });
 
 
+var PORT = process.env.PORT || 8080;
 
-
-// var server = app.listen(8080, function () {
-//   var host = server.address().address;
-//   var port = server.address().port;
-//   console.log('App listening at http://%s:%s', host, port);
-// });
-// module.exports = server; 
+var server = app.listen(PORT, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log('App listening at http://%s:%s', host, port);
+});
+// module.exports = server;
 
 // app.listen(process.env.PORT || 8080, () => {
 //   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
@@ -100,8 +100,8 @@ app.delete('/deleteUser/:id', function(req, res) {
 
 // app.listen(process.env.PORT || 8080)
 
-app.listen(process.env.PORT || 8080, () => { callback })
+// app.listen(process.env.PORT || 8080, () => { callback })
 
-module.exports = server; 
+module.exports = server;
 
 

@@ -92,9 +92,16 @@ app.delete('/deleteUser/:id', function(req, res) {
 // });
 // module.exports = server; 
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
+// app.listen(process.env.PORT || 8080, () => {
+//   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
+// });
+
+var port = process.env.PORT || 8000
+
+app.listen(port, function() {
+    console.log("App is running on port " + port);
 });
+
 module.exports = server; 
 
 

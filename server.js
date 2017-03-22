@@ -92,17 +92,15 @@ app.delete('/deleteUser/:id', function(req, res) {
 // });
 // module.exports = server; 
 
-// app.listen(process.env.PORT || 8080, () => {
-//   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
-// });
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
+});
 
 // var port = process.env.PORT || 8000
 
-// app.listen(process.env.PORT || 5000)
+// app.listen(process.env.PORT || 8080)
 
-server.connection({
-    port: process.env.PORT || 3000 
-});
+app.listen(process.env.PORT || 8080, () => { callback })
 
 module.exports = server; 
 

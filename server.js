@@ -98,7 +98,11 @@ app.delete('/deleteUser/:id', function(req, res) {
 
 // var port = process.env.PORT || 8000
 
-app.listen(process.env.PORT || 5000)
+// app.listen(process.env.PORT || 5000)
+
+app.connection({
+    port: process.env.PORT || 3000 
+});
 
 module.exports = server; 
 

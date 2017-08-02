@@ -1,9 +1,111 @@
 * {
-	font-family: 'Overlock', cursive;
+	font-family: 'Poppins', sans-serif;
 }
 
 body {
 	background-image: url("skyscraper-450793_960_720.jpg");
+}
+
+.tracking {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.a {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: -50px;
+}
+
+.mainDiv {
+	position: absolute;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding: 100px;
+	margin: 50px;
+}
+
+.toAppButton {
+	text-decoration: none;
+	position: relative;
+	vertical-align: bottom;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.description {
+	margin-bottom: 50px;
+}
+
+svg {
+	margin-bottom: -50px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+a:hover {
+	font-weight: 900;
+	color: #647979;
+}
+
+a:link {
+	color: black;
+}
+
+a:active {
+	color: black;
+}
+
+a:visited {
+	color: black;
+}
+
+.shape {
+  fill: transparent;
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  stroke: #647979;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 8px;
+  }
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    stroke-width: 2px;
+  }
+}
+
+.mainDiv:hover .shape {
+  -webkit-animation: 0.5s draw linear forwards;
+  animation: 0.5s draw linear forwards;
+}
+
+#loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(6,end) 2000ms infinite;      
+  animation: ellipsis steps(6,end) 2000ms infinite;
+  content: "\2026";
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 20px;    
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 20px;    
+  }
 }
 
 .topTitle {
@@ -33,6 +135,10 @@ h2 {
 	text-align: center;
 }
 
+.description {
+	text-align: center;
+}
+
 input {
 	margin-bottom: 15px;
 }
@@ -40,7 +146,6 @@ input {
 .addUser {
 	text-align: center;
 }
-
 
 .accordion {
 	width: 40%;

@@ -1,5 +1,4 @@
-
- $(function() {
+$(function() {
      $.getJSON("/getusers", function(data) {
          var count = 1;
          $.each(data, function(index, value) {

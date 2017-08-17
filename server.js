@@ -53,7 +53,7 @@ app.post('/newUser', function(req, res){
 
     thisUser.save(function(err) {
         if (err)
-            res.send(err);
+            return res.send(err);
         res.redirect('/');
     });
 });

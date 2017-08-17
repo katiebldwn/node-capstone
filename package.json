@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "\"Node capstone\"",
   "main": "server.js",
+  "engines": {"node": "8.1.0"},
   "scripts": {
     "deploy": "now --d",
     "start": "node server.js",

@@ -17,7 +17,9 @@ var NewUser = new Schema({
 
 var User = mongoose.model('User', NewUser);
 
-mongoose.connect("mongodb://User1:User1@ds145019.mlab.com:45019/node-capstone")
+// mongoose.connect("mongodb://User1:User1@ds145019.mlab.com:45019/node-capstone")
+
+mongoose.connect("mongodb://user2:user2@ds145019.mlab.com:45019/node-capstone")
 
 app.use(express.static("public"));
 

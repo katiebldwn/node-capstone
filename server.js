@@ -51,10 +51,10 @@ app.post('/newUser', function(req, res){
         lastName: req.body.lastName
     });
 
-    thisUser.save(function(err) {
+    thisUser.save(function(err, user) {
         if (err)
             return res.send(err);
-        res.redirect('/');
+        res.json(user);
     });
 });
 

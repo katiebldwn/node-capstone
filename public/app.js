@@ -128,7 +128,8 @@ $(function() {
              type: 'PUT',
              data: JSON.stringify(data),
              contentType: 'application/json',
-             url: 'http://localhost:8080/getUsers/' + idToUpdate,
+             // url: 'http://localhost:8080/getUsers/' + idToUpdate,
+             url: 'https://protected-dusk-99370.herokuapp.com/getUsers/' + idToUpdate,
              success: function(data) {
                  console.log('info added successfully');
              }
@@ -164,7 +165,8 @@ $(function() {
      	console.log(deleteItem);
      	$.ajax({
              type: 'DELETE',
-             url: 'http://localhost:8080/deleteUser/' + deleteItem,
+             // url: 'http://localhost:8080/deleteUser/' + deleteItem,
+             url: 'https://protected-dusk-99370.herokuapp.com/deleteUser/' + deleteItem,
              success: function(data) {
                  console.log('user deleted successfully');
              }
@@ -184,7 +186,8 @@ $(function() {
              type: 'PUT',
              data: JSON.stringify(data),
              contentType: 'application/json',
-             url: 'http://localhost:8080/getUsers/' + idToUpdate,
+             // url: 'http://localhost:8080/getUsers/' + idToUpdate,
+             url: 'https://protected-dusk-99370.herokuapp.com/getUsers/' + idToUpdate,
              success: function(data) {
                  console.log('user updated successfully');
              }
@@ -200,7 +203,8 @@ $(function() {
              type: 'POST',
              data: JSON.stringify(data),
              contentType: 'application/json',
-             url: 'http://localhost:8080/newUser',
+             // url: 'http://localhost:8080/newUser',
+             url: 'https://protected-dusk-99370.herokuapp.com/newUser',
              success: function(data) {
                  console.log('user added successfully');
              }
